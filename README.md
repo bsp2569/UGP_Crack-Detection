@@ -1,1 +1,0 @@
-# UGP_Crack-Detection
