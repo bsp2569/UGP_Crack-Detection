@@ -10,11 +10,13 @@ from models.knowledge_base import crack_knowledge_base
 app = Flask(__name__)
 
 def load_models():
+    from models.knowledge_base import crack_knowledge_base
     from models.deepcrack_model import DeepCrackModel
     from models.roadnet_model import RoadNetModel
     from models.base_model import BaseModel
     from models.deepcrack_networks import DeepCrackNetworks
-    from models.networks import Networks
+    from models.roadnet_networks import RoadNetNetworks  # if you use it
+    from models.networks import NetworksModel            # if you use it
 
     deepcrack_model = DeepCrackModel().build()
     roadnet_model = RoadNetModel().build()
@@ -61,9 +63,7 @@ def process_image(img_path):
     networks_result = networks_model.predict(img_array)
     
     detection_results = {
-        'num_cracks': int(deepcrack_result.sum() + roadnet_result.sum() +
-                          base_model_result.sum() + deepcrack_network_result.sum() +
-                          networks_result.sum()),
+        'num_cracks': int(deepcrack_result.sum() + roadnet_result.sum() +base_model_result.sum() + deepcrack_network_result.sum() +networks_result.sum()),
         'type': "shear",  # Placeholder; add logic for crack type detection
         'severity_levels': "Moderate", 
         'locations': "Center, Top-Left"
