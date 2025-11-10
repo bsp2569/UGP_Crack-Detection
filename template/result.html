@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crack Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .result-item {
+            border: 1px solid #ccc;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            background: #fafafa;
+        }
+        .image-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        pre {
+            background: #111;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .summary-text {
+            margin-top: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 18px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .back-link:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Crack Detection Summary</h1>
+
+    {% for item in summaries %}
+        <div class="result-item">
+            <div class="image-name">Image: {{ item.image }}</div>
+
+            <pre>{{ item.detection_results | tojson(indent=2) }}</pre>
+
+            <div class="summary-text">{{ item.summary }}</div>
+        </div>
+    {% endfor %}
+
+    <a class="back-link" href="{{ url_for('index') }}">Upload Another Image</a>
+
+</body>
+</html>
